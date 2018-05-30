@@ -11,7 +11,7 @@ public class Main {
             System.out.println("Cannot open the data source");
             return;
         }else{
-            List<Artist> results = dataSource.queryArtists();
+            List<Artist> results = dataSource.queryArtists(dataSource.ORDER_BY_ASC);
             for(Artist a : results){
                 System.out.println("ID : " + a.getId() + " NAME :" + a.getName());
             }
