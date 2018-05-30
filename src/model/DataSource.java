@@ -47,11 +47,8 @@ public class DataSource {
     }
 
     public List<Artist> queryArtists(){
-        Statement statement = null;
-        ResultSet results = null;
-        try{
-            statement = connection.createStatement();
-            results = statement.executeQuery("SELECT * FROM " + TABLE_ARTISTS);
+        try(Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery("SELECT * FROM " + TABLE_ARTISTS);){
             List<Artist> artists = new ArrayList<>();
             while(results.next()){
                 Artist artist = new Artist();
@@ -60,24 +57,9 @@ public class DataSource {
                 artists.add(artist);
             }
             return artists;
-        }catch(SQLException e){
+        }catch(SQLException e) {
             e.printStackTrace();
             return null;
-        }finally{
-            try{
-                if(results != null){
-                    results.close();
-                }
-            }catch (SQLException e){
-                e.printStackTrace();
-            }
-            try{
-                if(statement != null){
-                    statement.close();
-                }
-            }catch (SQLException e){
-                e.printStackTrace();
-            }
         }
     }
 }
