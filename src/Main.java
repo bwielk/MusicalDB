@@ -1,4 +1,7 @@
+import model.Artist;
 import model.DataSource;
+
+import java.util.List;
 
 public class Main {
 
@@ -9,6 +12,11 @@ public class Main {
             return;
         }else{
             dataSource.close();
+        }
+
+        List<Artist> results = dataSource.queryArtists();
+        for(Artist a : results){
+            a.toString();
         }
     }
 }
