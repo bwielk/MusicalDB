@@ -2,6 +2,7 @@ import model.Artist;
 import model.DataSource;
 
 import java.util.List;
+import java.util.Map;
 
 public class Main {
 
@@ -15,6 +16,10 @@ public class Main {
             for(Artist a : results){
                 System.out.println("ID : " + a.getId() + " NAME :" + a.getName());
             }
+            List<String> caroleKingAlbums = dataSource.queryAlbumsForArtist("Carole King", 1);
+            List<String> zzTopAlbums = dataSource.queryAlbumsForArtist("ZZ Top", 1);
+            System.out.println(caroleKingAlbums.toString());
+            System.out.println(zzTopAlbums.toString());
             dataSource.close();
         }
     }

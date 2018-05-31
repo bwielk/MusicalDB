@@ -1,8 +1,7 @@
 package model;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class DataSource {
 
@@ -83,6 +82,45 @@ public class DataSource {
             }
             return artists;
         }catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<String> queryAlbumsForArtist(String artistName, int sortOrder){
+        StringBuilder startQuery = new StringBuilder("SELECT ");
+        startQuery.append(TABLE_ALBUMS);
+        startQuery.append(".");
+        startQuery.append(COLUMNS_NAME_ALBUMS);
+        startQuery.append(" FROM ");
+        startQuery.append(TABLE_ALBUMS);
+        startQuery.append(" INNER JOIN ");
+        startQuery.append(TABLE_ARTISTS);
+        startQuery.append(" ON ");
+        startQuery.append(TABLE_ALBUMS);
+        startQuery.append(".");
+        startQuery.append(COLUMNS_ARTIST_ALBUMS);
+        startQuery.append(" = ");
+        startQuery.append(TABLE_ARTISTS);
+        startQuery.append(".");
+        startQuery.append(COLUMNS_ID_ARTIST);
+        startQuery.append(" WHERE " + TABLE_ARTISTS + "." + COLUMNS_ARTIST_NAME + " = \"" + artistName + "\"");
+        if(sortOrder != ORDER_BY_NONE){
+            startQuery.append(" ORDER BY " + TABLE_ALBUMS + "." + COLUMNS_NAME_ALBUMS + " COLLATE NOCASE ");
+            if(sortOrder == ORDER_BY_DESC){
+                startQuery.append("DESC");
+            }else{
+                startQuery.append("ASC");
+            }
+        }
+        try(Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery(startQuery.toString())){
+            List<String> artistToalbum = new LinkedList<>();
+            while(results.next()){
+                artistToalbum.add(results.getString(1));
+            }
+            return artistToalbum;
+        }catch(SQLException e){
             e.printStackTrace();
             return null;
         }
