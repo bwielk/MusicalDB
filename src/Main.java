@@ -23,24 +23,24 @@ public class Main {
             System.out.println(caroleKingAlbums.toString());
             System.out.println(zzTopAlbums.toString());
 
-            List<SongArtist> songArtistsHeartless;
-            songArtistsHeartless = dataSource.queryArtistForSong("Heartless");
-            System.out.println(songArtistsHeartless.toString());
-            for(SongArtist songArtist : songArtistsHeartless){
+            List<SongArtist> songArtists;
+            songArtists = dataSource.queryArtistForSong("Heartless");
+            System.out.println(songArtists.toString());
+            for(SongArtist songArtist : songArtists){
                 System.out.println("\nARTIST: " + songArtist.getArtistName() +
                 "\nTRACK NUMBER: " + songArtist.getTrackNumber() +
                 "\nALBUM: " + songArtist.getAlbumName());
             }
 
-            songArtistsHeartless = dataSource.queryArtistForSong("Going Under");
-            for(SongArtist songArtist : songArtistsHeartless){
+            songArtists = dataSource.queryArtistForSong("Going Under");
+            for(SongArtist songArtist : songArtists){
                 System.out.println("\nARTIST: " + songArtist.getArtistName() +
                         "\nTRACK NUMBER: " + songArtist.getTrackNumber() +
                         "\nALBUM: " + songArtist.getAlbumName());
             }
 
-            songArtistsHeartless = dataSource.queryArtistForSong("Too Late");
-            for(SongArtist songArtist : songArtistsHeartless){
+            songArtists = dataSource.queryArtistForSong("Too Late");
+            for(SongArtist songArtist : songArtists){
                 System.out.println("\nARTIST: " + songArtist.getArtistName() +
                         "\nTRACK NUMBER: " + songArtist.getTrackNumber() +
                         "\nALBUM: " + songArtist.getAlbumName());
@@ -50,6 +50,11 @@ public class Main {
             System.out.println("Number of results " + dataSource.getCount(DataSource.TABLE_SONGS));
 
             System.out.println(dataSource.createViewSongArtists());
+
+            songArtists = dataSource.querySongInfoView("Go Your Own Way");
+            for(SongArtist sa : songArtists){
+                System.out.println("\n" + sa.getArtistName() + " // " + sa.getAlbumName() + "// " + sa.getTrackNumber());
+            }
             dataSource.close();
         }
     }

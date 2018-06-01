@@ -54,6 +54,9 @@ public class DataSource {
             " FROM " + TABLE_SONGS + " INNER JOIN " + TABLE_ALBUMS + " ON " + TABLE_SONGS + "." + COLUMNS_ALBUM_SONG + " = " +TABLE_ALBUMS + "." + COLUMNS_ID_ALBUMS +
             " INNER JOIN " + TABLE_ARTISTS + " ON " + TABLE_ALBUMS + "." + COLUMNS_ARTIST_ALBUMS + " = " + TABLE_ARTISTS + "." + COLUMNS_ID_ARTIST;
 
+    public static final String QUERY_VIEW_SONG_INFO = "SELECT " + COLUMNS_ARTIST_NAME + ", " + COLUMNS_ALBUM_SONG + ", " + COLUMNS_TRACK_SONG + " FROM " +
+            TABLE_ARTIST_SONG_VIEW + " WHERE " + COLUMNS_TITLE_SONG + " = \"";
+
     public boolean open(){
         try{
             connection = DriverManager.getConnection(CONNECTION_STRING);
@@ -198,6 +201,25 @@ public class DataSource {
         }catch(SQLException e){
             e.printStackTrace();
             return false;
+        }
+    }
+
+    public List<SongArtist> querySongInfoView(String title){
+        StringBuilder sb = new StringBuilder(QUERY_VIEW_SONG_INFO + title + "\"");
+        List<SongArtist> songArtists = new ArrayList<>();
+        try(Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery(sb.toString())){
+            while(results.next()){
+                SongArtist sa = new SongArtist();
+                sa.setArtistName(results.getString(1));
+                sa.setAlbumName(results.getString(2));
+                sa.setTrackNumber(results.getInt(3));
+                songArtists.add(sa);
+            }
+            return songArtists;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return null;
         }
     }
 }

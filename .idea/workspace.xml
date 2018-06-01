@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7a12c6be-9295-4d66-a901-550234d93496" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/DataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/DataSource.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -14,11 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="DataSource.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DataSource.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/DataSource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="198" column="18" selection-start-line="198" selection-start-column="18" selection-end-line="198" selection-end-column="18" />
+            <state relative-caret-position="197">
+              <caret line="217" column="13" lean-forward="true" selection-start-line="217" selection-start-column="13" selection-end-line="217" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -29,13 +30,14 @@
       <file leaf-file-name="SongArtist.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/model/SongArtist.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
+            <state relative-caret-position="197">
+              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
               <folding>
                 <element signature="e#166#167#0" expanded="true" />
                 <element signature="e#200#201#0" expanded="true" />
                 <element signature="e#236#237#0" expanded="true" />
                 <element signature="e#268#269#0" expanded="true" />
+                <element signature="e#305#306#0" expanded="true" />
                 <element signature="e#338#339#0" expanded="true" />
                 <element signature="e#388#389#0" expanded="true" />
                 <element signature="e#430#431#0" expanded="true" />
@@ -106,11 +108,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="49" column="96" selection-start-line="49" selection-start-column="96" selection-end-line="49" selection-end-column="96" />
+            <state relative-caret-position="231">
+              <caret line="55" column="96" selection-start-line="55" selection-start-column="96" selection-end-line="55" selection-end-column="96" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -138,12 +140,12 @@
         <option value="$PROJECT_DIR$/src/model/Album.java" />
         <option value="$PROJECT_DIR$/src/model/Song.java" />
         <option value="$PROJECT_DIR$/src/model/SongArtist.java" />
-        <option value="$PROJECT_DIR$/src/Main.java" />
         <option value="$PROJECT_DIR$/src/model/DataSource.java" />
+        <option value="$PROJECT_DIR$/src/Main.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="width" value="1378" />
     <option name="height" value="780" />
@@ -380,27 +382,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/model/Album.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="26" lean-forward="true" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
-          <folding>
-            <element signature="e#148#149#0" expanded="true" />
-            <element signature="e#180#181#0" expanded="true" />
-            <element signature="e#213#214#0" expanded="true" />
-            <element signature="e#241#242#0" expanded="true" />
-            <element signature="e#288#289#0" expanded="true" />
-            <element signature="e#330#331#0" expanded="true" />
-            <element signature="e#361#362#0" expanded="true" />
-            <element signature="e#388#389#0" expanded="true" />
-            <element signature="e#414#415#0" expanded="true" />
-            <element signature="e#439#440#0" expanded="true" />
-            <element signature="e#472#473#0" expanded="true" />
-            <element signature="e#504#505#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/Artist.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -432,25 +413,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="49" column="96" selection-start-line="49" selection-start-column="96" selection-end-line="49" selection-end-column="96" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/SongArtist.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="16" column="34" selection-start-line="16" selection-start-column="34" selection-end-line="16" selection-end-column="34" />
+        <state relative-caret-position="197">
+          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
           <folding>
             <element signature="e#166#167#0" expanded="true" />
             <element signature="e#200#201#0" expanded="true" />
             <element signature="e#236#237#0" expanded="true" />
             <element signature="e#268#269#0" expanded="true" />
+            <element signature="e#305#306#0" expanded="true" />
             <element signature="e#338#339#0" expanded="true" />
             <element signature="e#388#389#0" expanded="true" />
             <element signature="e#430#431#0" expanded="true" />
@@ -462,10 +434,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/Album.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="26" lean-forward="true" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+          <folding>
+            <element signature="e#148#149#0" expanded="true" />
+            <element signature="e#180#181#0" expanded="true" />
+            <element signature="e#213#214#0" expanded="true" />
+            <element signature="e#241#242#0" expanded="true" />
+            <element signature="e#288#289#0" expanded="true" />
+            <element signature="e#330#331#0" expanded="true" />
+            <element signature="e#361#362#0" expanded="true" />
+            <element signature="e#388#389#0" expanded="true" />
+            <element signature="e#414#415#0" expanded="true" />
+            <element signature="e#439#440#0" expanded="true" />
+            <element signature="e#472#473#0" expanded="true" />
+            <element signature="e#504#505#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/model/DataSource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="198" column="18" selection-start-line="198" selection-start-column="18" selection-end-line="198" selection-end-column="18" />
+        <state relative-caret-position="197">
+          <caret line="217" column="13" lean-forward="true" selection-start-line="217" selection-start-column="13" selection-end-line="217" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="55" column="96" selection-start-line="55" selection-start-column="96" selection-end-line="55" selection-end-column="96" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
