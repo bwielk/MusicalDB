@@ -143,7 +143,7 @@ public class DataSource {
             while(results.next()){
                 SongArtist sa = new SongArtist();
                 sa.setArtistName(results.getString(1));
-                sa.setArtistName(results.getString(2));
+                sa.setAlbumName(results.getString(2));
                 sa.setTrackNumber(results.getInt(3));
                 artists.add(sa);
             }
@@ -151,6 +151,21 @@ public class DataSource {
         }catch(SQLException e){
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public void querySongsMetadata(){
+        String sql = "SELECT * FROM " + TABLE_SONGS;
+        try(Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery(sql)){
+
+            ResultSetMetaData meta = results.getMetaData();
+            int columnns = meta.getColumnCount();
+            for(int i=1; i<=columnns; i++){
+                System.out.println("Columns %d in the songs table is name %s\n" + i + " => " + meta.getColumnName(i));
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
         }
     }
 }

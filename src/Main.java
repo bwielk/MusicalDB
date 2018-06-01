@@ -22,8 +22,30 @@ public class Main {
             System.out.println(caroleKingAlbums.toString());
             System.out.println(zzTopAlbums.toString());
 
-            List<SongArtist> songArtistsHeartless = dataSource.queryArtistForSong("Heartless");
+            List<SongArtist> songArtistsHeartless;
+            songArtistsHeartless = dataSource.queryArtistForSong("Heartless");
             System.out.println(songArtistsHeartless.toString());
+            for(SongArtist songArtist : songArtistsHeartless){
+                System.out.println("\nARTIST: " + songArtist.getArtistName() +
+                "\nTRACK NUMBER: " + songArtist.getTrackNumber() +
+                "\nALBUM: " + songArtist.getAlbumName());
+            }
+
+            songArtistsHeartless = dataSource.queryArtistForSong("Going Under");
+            for(SongArtist songArtist : songArtistsHeartless){
+                System.out.println("\nARTIST: " + songArtist.getArtistName() +
+                        "\nTRACK NUMBER: " + songArtist.getTrackNumber() +
+                        "\nALBUM: " + songArtist.getAlbumName());
+            }
+
+            songArtistsHeartless = dataSource.queryArtistForSong("Too Late");
+            for(SongArtist songArtist : songArtistsHeartless){
+                System.out.println("\nARTIST: " + songArtist.getArtistName() +
+                        "\nTRACK NUMBER: " + songArtist.getTrackNumber() +
+                        "\nALBUM: " + songArtist.getAlbumName());
+            }
+
+            dataSource.querySongsMetadata();
             dataSource.close();
         }
     }
