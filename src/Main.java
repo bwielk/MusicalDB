@@ -2,6 +2,7 @@ import model.Artist;
 import model.DataSource;
 import model.SongArtist;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 
 public class Main {
@@ -46,6 +47,7 @@ public class Main {
             }
 
             dataSource.querySongsMetadata();
+            System.out.println("Number of results " + dataSource.getCount(DataSource.TABLE_SONGS));
             dataSource.close();
         }
     }

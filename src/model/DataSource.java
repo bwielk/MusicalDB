@@ -168,4 +168,16 @@ public class DataSource {
             e.printStackTrace();
         }
     }
+
+    public int getCount(String table){
+        String sql = "SELECT COUNT(*) FROM " + table;
+        try(Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery(sql)){
+            int count = results.getInt(1);
+            return count;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return -1;
+        }
+    }
 }
