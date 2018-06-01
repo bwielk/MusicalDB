@@ -8,6 +8,7 @@ public class DataSource {
 
     public static final String DB_NAME = "music.db";
     public static final String CONNECTION_STRING = "jdbc:sqlite:C:\\Users\\Blazej W\\IdeaProjects\\MusicDB\\" + DB_NAME;
+    private Connection connection;
 
     public static final String TABLE_ALBUMS = "albums";
     public static final String COLUMNS_ID_ALBUMS = "_id";
@@ -45,7 +46,13 @@ public class DataSource {
             " INNER JOIN " + TABLE_ARTISTS  + " ON " + TABLE_ALBUMS + "." + COLUMNS_ARTIST_ALBUMS + " = " + TABLE_ARTISTS + "." + COLUMNS_ID_ARTIST +
             " WHERE " + TABLE_SONGS + "." + COLUMNS_TITLE_SONG + " = \"";
 
-    private Connection connection;
+    public static final String TABLE_ARTIST_SONG_VIEW = "artist_list";
+
+    public static final String CREATE_ARTIST_FOR_SONG_VIEW = "CREATE VIEW IF NOT EXISTS " + TABLE_ARTIST_SONG_VIEW + " AS SELECT " + TABLE_ARTISTS +
+            "." + COLUMNS_ARTIST_NAME + ", " + TABLE_ALBUMS + "." + COLUMNS_NAME_ALBUMS + " AS " + COLUMNS_ALBUM_SONG + ", " +
+            TABLE_SONGS + "." + COLUMNS_TRACK_SONG + ", " + TABLE_SONGS + "." + COLUMNS_TITLE_SONG +
+            " FROM " + TABLE_SONGS + " INNER JOIN " + TABLE_ALBUMS + " ON " + TABLE_SONGS + "." + COLUMNS_ALBUM_SONG + " = " +TABLE_ALBUMS + "." + COLUMNS_ID_ALBUMS +
+            " INNER JOIN " + TABLE_ARTISTS + " ON " + TABLE_ALBUMS + "." + COLUMNS_ARTIST_ALBUMS + " = " + TABLE_ARTISTS + "." + COLUMNS_ID_ARTIST;
 
     public boolean open(){
         try{
@@ -170,14 +177,27 @@ public class DataSource {
     }
 
     public int getCount(String table){
-        String sql = "SELECT COUNT(*) FROM " + table;
+        String sql = "SELECT COUNT(*), MIN(_id), MAX(_id) AS maximum FROM " + table;
         try(Statement statement = connection.createStatement();
             ResultSet results = statement.executeQuery(sql)){
             int count = results.getInt(1);
+            int min = results.getInt(2);
+            int max = results.getInt("maximum");
+            System.out.format("MINIMAL NUM => %d MAXIMUM NUM => %d\n", min, max);
             return count;
         }catch(SQLException e){
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    public boolean createViewSongArtists(){
+        try(Statement statement = connection.createStatement()){
+            statement.execute(CREATE_ARTIST_FOR_SONG_VIEW);
+            return true;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return false;
         }
     }
 }

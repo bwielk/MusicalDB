@@ -48,6 +48,8 @@ public class Main {
 
             dataSource.querySongsMetadata();
             System.out.println("Number of results " + dataSource.getCount(DataSource.TABLE_SONGS));
+
+            System.out.println(dataSource.createViewSongArtists());
             dataSource.close();
         }
     }
