@@ -1,5 +1,6 @@
 package model;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.*;
 
@@ -35,6 +36,14 @@ public class DataSource {
     public static final int ORDER_BY_NONE = 1;
     public static final int ORDER_BY_ASC = 2;
     public static final int ORDER_BY_DESC = 3;
+
+    public static final String QUERY_ARTIST_FOR_SONG_START = "SELECT " + TABLE_ARTISTS + "." + COLUMNS_ARTIST_NAME +
+            ", " + TABLE_ALBUMS + "." + COLUMNS_NAME_ALBUMS +
+            ", " + TABLE_SONGS + "." + COLUMNS_TRACK_SONG +
+            " FROM " + TABLE_SONGS +
+            " INNER JOIN " + TABLE_ALBUMS + " ON " + TABLE_SONGS + "." + COLUMNS_ALBUM_SONG + " = " + TABLE_ALBUMS + "." + COLUMNS_ID_ALBUMS +
+            " INNER JOIN " + TABLE_ARTISTS  + " ON " + TABLE_ALBUMS + "." + COLUMNS_ARTIST_ALBUMS + " = " + TABLE_ARTISTS + "." + COLUMNS_ID_ARTIST +
+            " WHERE " + TABLE_SONGS + "." + COLUMNS_TITLE_SONG + " = \"";
 
     private Connection connection;
 
@@ -120,6 +129,25 @@ public class DataSource {
                 artistToalbum.add(results.getString(1));
             }
             return artistToalbum;
+        }catch(SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<SongArtist> queryArtistForSong(String songName){
+        StringBuilder startQuery = new StringBuilder(QUERY_ARTIST_FOR_SONG_START + songName + "\"");
+        try(Statement statement = connection.createStatement();
+            ResultSet results = statement.executeQuery(startQuery.toString())){
+            List<SongArtist> artists = new ArrayList<>();
+            while(results.next()){
+                SongArtist sa = new SongArtist();
+                sa.setArtistName(results.getString(1));
+                sa.setArtistName(results.getString(2));
+                sa.setTrackNumber(results.getInt(3));
+                artists.add(sa);
+            }
+            return  artists;
         }catch(SQLException e){
             e.printStackTrace();
             return null;

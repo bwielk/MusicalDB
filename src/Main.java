@@ -1,8 +1,8 @@
 import model.Artist;
 import model.DataSource;
+import model.SongArtist;
 
 import java.util.List;
-import java.util.Map;
 
 public class Main {
 
@@ -16,10 +16,14 @@ public class Main {
             for(Artist a : results){
                 System.out.println("ID : " + a.getId() + " NAME :" + a.getName());
             }
-            List<String> caroleKingAlbums = dataSource.queryAlbumsForArtist("Carole King", 1);
+
+            List<String> caroleKingAlbums = dataSource.queryAlbumsForArtist("Carole King", DataSource.ORDER_BY_DESC);
             List<String> zzTopAlbums = dataSource.queryAlbumsForArtist("ZZ Top", 1);
             System.out.println(caroleKingAlbums.toString());
             System.out.println(zzTopAlbums.toString());
+
+            List<SongArtist> songArtistsHeartless = dataSource.queryArtistForSong("Heartless");
+            System.out.println(songArtistsHeartless.toString());
             dataSource.close();
         }
     }
