@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7a12c6be-9295-4d66-a901-550234d93496" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/model/DataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/DataSource.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -18,8 +17,8 @@
       <file leaf-file-name="DataSource.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/model/DataSource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="282" column="5" selection-start-line="282" selection-start-column="5" selection-end-line="282" selection-end-column="5" />
+            <state relative-caret-position="204">
+              <caret line="313" column="43" selection-start-line="313" selection-start-column="43" selection-end-line="313" selection-end-column="43" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -576,8 +575,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/model/DataSource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="282" column="5" selection-start-line="282" selection-start-column="5" selection-end-line="282" selection-end-column="5" />
+        <state relative-caret-position="204">
+          <caret line="313" column="43" selection-start-line="313" selection-start-column="43" selection-end-line="313" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -601,7 +600,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>No facets are configured</last-edited>
+          <last-edited />
           <splitter-proportions>
             <option name="proportions">
               <list>

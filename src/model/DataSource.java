@@ -281,4 +281,57 @@ public class DataSource {
            }
        }
     }
+
+    private int insertAlbum(String name, int artistId) throws SQLException{
+        queryAlbum.setString(1, name);
+        ResultSet results = queryAlbum.executeQuery();
+        if(results.next()){
+            return results.getInt(1);
+        }else{
+            insertToAlbums.setString(1, name);
+            insertToAlbums.setInt(2, artistId);
+            int affectedRows = insertToAlbums.executeUpdate();
+            if(affectedRows != 1){
+                throw new SQLException("Couldn't insert the albums");
+            }else{
+                ResultSet genKeys = insertToAlbums.getGeneratedKeys();
+                if(genKeys.next()){
+                    return genKeys.getInt(1);
+                }else{
+                    throw new SQLException("Couldn't get id for the albums");
+                }
+            }
+        }
+    }
+
+    private int insertSong(String name, String artist, String album, int track){
+        try{
+            connection.setAutoCommit(false);
+            int artistId = insertArtist(artist);
+            int albumId = insertAlbum(album, artistId);
+            insertToSongs.setInt(1, track);
+            insertToSongs.setString(2, name);
+            insertToSongs.setInt(3, albumId);
+            int affectedRows = insertToSongs.executeUpdate();
+            if(affectedRows != 1){
+                connection.commit();
+            }else{
+                throw new SQLException("Song not inserted");
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+            try{
+                //ROLLBACK
+                connection.rollback();
+            }catch(SQLException e2){
+                e2.printStackTrace();
+            }
+        }finally{
+            try{
+                connection.setAutoCommit(true);
+            }catch(SQLException e3){
+                e3.printStackTrace();
+            }
+        }
+    }
 }
