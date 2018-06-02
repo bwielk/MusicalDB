@@ -1,6 +1,6 @@
 package model;
 
-import javax.xml.transform.Result;
+import javax.swing.plaf.nimbus.State;
 import java.sql.*;
 import java.util.*;
 
@@ -14,9 +14,6 @@ public class DataSource {
     public static final String COLUMNS_ID_ALBUMS = "_id";
     public static final String COLUMNS_NAME_ALBUMS = "name";
     public static final String COLUMNS_ARTIST_ALBUMS = "artist";
-    public static final int INDEX_ALBUM_ID = 1;
-    public static final int INDEX_ALBUM_NAME = 2;
-    public static final int INDEX_ALBUM_ARTIST = 3;
 
     public static final String TABLE_ARTISTS = "artists";
     public static final String COLUMNS_ID_ARTIST = "_id";
@@ -29,10 +26,6 @@ public class DataSource {
     public static final String COLUMNS_TRACK_SONG = "track";
     public static final String COLUMNS_TITLE_SONG = "title";
     public static final String COLUMNS_ALBUM_SONG = "album";
-    public static final int INDEX_SONG_ID = 1;
-    public static final int INDEX_SONG_TRACK = 2;
-    public static final int INDEX_SONG_TITLE = 3;
-    public static final int INDEX_SONG_ALBUM = 4;
 
     public static final int ORDER_BY_NONE = 1;
     public static final int ORDER_BY_ASC = 2;
@@ -62,15 +55,31 @@ public class DataSource {
 
     private PreparedStatement querySongInfoView;
 
-    //CONSTANTS FOR A TRANSACTION
+    //CONSTANTS AND PREPARED STATEMENTS FOR A TRANSACTION
     public static final String INSERT_ARTIST = "INSERT INTO " + TABLE_ARTISTS + "(" + COLUMNS_ARTIST_NAME + ") VALUES (?)";
     public static final String INSERT_ALBUM = "INSERT INTO " + TABLE_ALBUMS + "(" + COLUMNS_NAME_ALBUMS + ", " + COLUMNS_ARTIST_ALBUMS + ") VALUES (?,?)";
     public static final String INSERT_SONG = "INSERT INTO " + TABLE_SONGS + "(" + COLUMNS_TRACK_SONG + ", " + COLUMNS_TITLE_SONG + ", " + COLUMNS_ALBUM_SONG + ") VALUES (?,?,?)";
-    
+    private PreparedStatement insertToArtists;
+    private PreparedStatement insertToAlbums;
+    private PreparedStatement insertToSongs;
+
+    public static final String QUERY_ARTIST = "SELECT FROM " + COLUMNS_ID_ARTIST  + "FROM " + TABLE_ARTISTS + " WHERE " + COLUMNS_ARTIST_NAME + " = ?";
+    public static final String QUERY_ALBUM = "SELECT FROM " + COLUMNS_ID_ALBUMS + "FROM " + TABLE_ALBUMS + " WHERE " + COLUMNS_NAME_ALBUMS + " = ?";
+    private PreparedStatement queryArtist;
+    private PreparedStatement queryAlbum;
+    /////////////////////////////////////////////////////
+
     public boolean open(){
         try{
             connection = DriverManager.getConnection(CONNECTION_STRING);
             querySongInfoView = connection.prepareStatement(QUERY_VIEW_SONG_INFO_PREP);
+            //PREPARED STATEMENTS FOR TRANSACTIONS
+            insertToArtists = connection.prepareStatement(INSERT_ARTIST, Statement.RETURN_GENERATED_KEYS);
+            insertToAlbums = connection.prepareStatement(INSERT_ALBUM, Statement.RETURN_GENERATED_KEYS);
+            insertToSongs = connection.prepareStatement(INSERT_SONG);
+            queryArtist = connection.prepareStatement(QUERY_ARTIST);
+            queryAlbum = connection.prepareStatement(QUERY_ALBUM);
+            //////////////////////////////////////
             return true;
         }catch(SQLException e){
             e.printStackTrace();
@@ -82,6 +91,21 @@ public class DataSource {
         try{
             if(querySongInfoView != null){
                 querySongInfoView.close();
+            }
+            if(insertToArtists != null){
+                insertToArtists.close();
+            }
+            if(insertToAlbums != null){
+                insertToAlbums.close();
+            }
+            if(insertToSongs != null){
+                insertToSongs.close();
+            }
+            if(queryArtist != null){
+                queryArtist.close();
+            }
+            if(queryAlbum != null){
+                queryAlbum.close();
             }
             if(connection != null){
                 connection.close();
