@@ -62,7 +62,11 @@ public class DataSource {
 
     private PreparedStatement querySongInfoView;
 
-
+    //CONSTANTS FOR A TRANSACTION
+    public static final String INSERT_ARTIST = "INSERT INTO " + TABLE_ARTISTS + "(" + COLUMNS_ARTIST_NAME + ") VALUES (?)";
+    public static final String INSERT_ALBUM = "INSERT INTO " + TABLE_ALBUMS + "(" + COLUMNS_NAME_ALBUMS + ", " + COLUMNS_ARTIST_ALBUMS + ") VALUES (?,?)";
+    public static final String INSERT_SONG = "INSERT INTO " + TABLE_SONGS + "(" + COLUMNS_TRACK_SONG + ", " + COLUMNS_TITLE_SONG + ", " + COLUMNS_ALBUM_SONG + ") VALUES (?,?,?)";
+    
     public boolean open(){
         try{
             connection = DriverManager.getConnection(CONNECTION_STRING);
