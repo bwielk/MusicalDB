@@ -4,6 +4,7 @@ import model.SongArtist;
 
 import javax.xml.crypto.Data;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
@@ -49,9 +50,12 @@ public class Main {
             dataSource.querySongsMetadata();
             System.out.println("Number of results " + dataSource.getCount(DataSource.TABLE_SONGS));
 
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter a song title: ");
+            String title = scanner.nextLine();
             System.out.println(dataSource.createViewSongArtists());
 
-            songArtists = dataSource.querySongInfoView("Go Your Own Way");
+            songArtists = dataSource.querySongInfoView(title);
             for(SongArtist sa : songArtists){
                 System.out.println("\n" + sa.getArtistName() + " // " + sa.getAlbumName() + "// " + sa.getTrackNumber());
             }
