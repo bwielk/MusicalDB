@@ -260,4 +260,25 @@ public class DataSource {
             return null;
         }
     }
+
+    private int insertArtist(String name) throws SQLException{
+       queryArtist.setString(1, name);
+       ResultSet results = queryArtist.executeQuery();
+       if(results.next()){
+           return results.getInt(1);
+       }else{
+           insertToArtists.setString(1, name);
+           int affectedRows = insertToArtists.executeUpdate();
+           if(affectedRows != 1){
+               throw new SQLException("Couldn't insert the artists");
+           }else{
+               ResultSet genKeys = insertToArtists.getGeneratedKeys();
+               if(genKeys.next()){
+                   return genKeys.getInt(1);
+               }else{
+                   throw new SQLException("Couldn't get id for the artists");
+               }
+           }
+       }
+    }
 }
