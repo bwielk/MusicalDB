@@ -56,15 +56,15 @@ public class DataSource {
     private PreparedStatement querySongInfoView;
 
     //CONSTANTS AND PREPARED STATEMENTS FOR A TRANSACTION
-    public static final String INSERT_ARTIST = "INSERT INTO " + TABLE_ARTISTS + "(" + COLUMNS_ARTIST_NAME + ") VALUES (?)";
-    public static final String INSERT_ALBUM = "INSERT INTO " + TABLE_ALBUMS + "(" + COLUMNS_NAME_ALBUMS + ", " + COLUMNS_ARTIST_ALBUMS + ") VALUES (?,?)";
-    public static final String INSERT_SONG = "INSERT INTO " + TABLE_SONGS + "(" + COLUMNS_TRACK_SONG + ", " + COLUMNS_TITLE_SONG + ", " + COLUMNS_ALBUM_SONG + ") VALUES (?,?,?)";
+    public static final String INSERT_ARTIST = "INSERT INTO " + TABLE_ARTISTS + " (" + COLUMNS_ARTIST_NAME + ") VALUES (?)";
+    public static final String INSERT_ALBUM = "INSERT INTO " + TABLE_ALBUMS + " (" + COLUMNS_NAME_ALBUMS + ", " + COLUMNS_ARTIST_ALBUMS + ") VALUES (?,?)";
+    public static final String INSERT_SONG = "INSERT INTO " + TABLE_SONGS + " (" + COLUMNS_TRACK_SONG + ", " + COLUMNS_TITLE_SONG + ", " + COLUMNS_ALBUM_SONG + ") VALUES (?,?,?)";
     private PreparedStatement insertToArtists;
     private PreparedStatement insertToAlbums;
     private PreparedStatement insertToSongs;
 
-    public static final String QUERY_ARTIST = "SELECT FROM " + COLUMNS_ID_ARTIST  + "FROM " + TABLE_ARTISTS + " WHERE " + COLUMNS_ARTIST_NAME + " = ?";
-    public static final String QUERY_ALBUM = "SELECT FROM " + COLUMNS_ID_ALBUMS + "FROM " + TABLE_ALBUMS + " WHERE " + COLUMNS_NAME_ALBUMS + " = ?";
+    public static final String QUERY_ARTIST = "SELECT " + COLUMNS_ID_ARTIST  + " FROM " + TABLE_ARTISTS + " WHERE " + COLUMNS_ARTIST_NAME + " = ?";
+    public static final String QUERY_ALBUM = "SELECT " + COLUMNS_ID_ALBUMS + " FROM " + TABLE_ALBUMS + " WHERE " + COLUMNS_NAME_ALBUMS + " = ?";
     private PreparedStatement queryArtist;
     private PreparedStatement queryAlbum;
     /////////////////////////////////////////////////////
@@ -271,14 +271,13 @@ public class DataSource {
            int affectedRows = insertToArtists.executeUpdate();
            if(affectedRows != 1){
                throw new SQLException("Couldn't insert the artists");
-           }else{
+           }
                ResultSet genKeys = insertToArtists.getGeneratedKeys();
                if(genKeys.next()){
                    return genKeys.getInt(1);
                }else{
                    throw new SQLException("Couldn't get id for the artists");
                }
-           }
        }
     }
 
@@ -293,7 +292,7 @@ public class DataSource {
             int affectedRows = insertToAlbums.executeUpdate();
             if(affectedRows != 1){
                 throw new SQLException("Couldn't insert the albums");
-            }else{
+            }
                 ResultSet genKeys = insertToAlbums.getGeneratedKeys();
                 if(genKeys.next()){
                     return genKeys.getInt(1);
@@ -301,10 +300,9 @@ public class DataSource {
                     throw new SQLException("Couldn't get id for the albums");
                 }
             }
-        }
     }
 
-    private int insertSong(String name, String artist, String album, int track){
+    public void insertSong(String name, String artist, String album, int track){
         try{
             connection.setAutoCommit(false);
             int artistId = insertArtist(artist);
@@ -313,8 +311,9 @@ public class DataSource {
             insertToSongs.setString(2, name);
             insertToSongs.setInt(3, albumId);
             int affectedRows = insertToSongs.executeUpdate();
-            if(affectedRows != 1){
+            if(affectedRows == 1){
                 connection.commit();
+                System.out.println("Song inserted");
             }else{
                 throw new SQLException("Song not inserted");
             }

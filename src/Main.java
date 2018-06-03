@@ -59,6 +59,8 @@ public class Main {
             for(SongArtist sa : songArtists){
                 System.out.println("\n" + sa.getArtistName() + " // " + sa.getAlbumName() + "// " + sa.getTrackNumber());
             }
+            dataSource.insertSong("Touch of Grey", "Grateful Dead", "In The Dark", 1);
+            dataSource.insertSong("Umbrella", "Rihanna", "Good Girl Gone Bad", 1);
             dataSource.close();
         }
     }
